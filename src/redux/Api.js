@@ -4,8 +4,6 @@ import * as actions from "../redux/Action";
 export const getRepo =
   (repoName, perPage = 5, page = 1) =>
   (dispatch) => {
-
-    console.log("1");
     const requestAction = actions.getRepoRequest();
     dispatch(requestAction);
 

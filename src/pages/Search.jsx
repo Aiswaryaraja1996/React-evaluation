@@ -8,7 +8,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Pagination from "../components/Pagination"
+import Pagination from "../components/Pagination";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -28,8 +28,6 @@ export default function Search() {
   const [perPage, setPerPage] = useState(5);
 
   useEffect(() => dispatch(getRepo(repoName, perPage, page)), [page, perPage]);
-
-  
 
   return (
     <div style={{ textAlign: "center" }}>
