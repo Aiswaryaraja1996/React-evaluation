@@ -30,11 +30,12 @@ export default function Login() {
         <TextField
           id="outlined-basic"
           variant="outlined"
+          label="UserName"
           onChange={(e) => setUserName(e.target.value)}
         />
         <br />
 
-        <TextField id="outlined-basic" variant="outlined" />
+        <TextField id="outlined-basic" variant="outlined" label="Password" />
         <br />
 
         <Button
