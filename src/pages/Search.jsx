@@ -26,12 +26,19 @@ export default function Search() {
 
   const [perPage, setPerPage] = useState(5);
 
-  useEffect(() => dispatch(getRepo(repoName, perPage, page)), [page]);
+  useEffect(() => dispatch(getRepo(repoName, perPage, page)), [page, perPage]);
 
   const Pagination = ({ total, currPage, onPageChange }) => {
     const Pages = new Array(total).fill(0);
     return (
-      <div style={{ display: "flex", marginTop: "10px",justifyContent: "center",alignItems: "center"}}>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "10px",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         {Pages.map((value, index) =>
           currPage === index + 1 ? (
             <button
@@ -73,11 +80,11 @@ export default function Search() {
       <label for="perPage">Choose per page value:</label>
 
       <select name="perPage" onChange={(e) => setPerPage(e.target.value)}>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
         <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
       </select>
 
       <Pagination
@@ -90,7 +97,7 @@ export default function Search() {
         <Grid container spacing={4} justifyContent="center" alignItems="center">
           {!isLoading &&
             repos.items?.map((item) => (
-              <Grid item xs={3} key={item.id}>
+              <Grid item xs={12} xl={3} lg={4} md={6} sm={12} key={item.id}>
                 <Item>
                   <p>
                     <b>{item.full_name}</b>
