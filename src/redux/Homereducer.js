@@ -1,4 +1,4 @@
-import { actionConstants } from "./action";
+import { actionConstants } from "./Action";
 
 const initialState = {
   repos: [],

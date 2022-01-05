@@ -9,11 +9,12 @@ export default function Allroutes() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/login">
-        <Login />
-      </Route>
+
       <Route exact path="/search">
         <Search />
+      </Route>
+      <Route exact path="/login">
+        <Login />
       </Route>
     </Switch>
   );
