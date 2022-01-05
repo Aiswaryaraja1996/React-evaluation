@@ -28,10 +28,6 @@ export default function Navbar() {
         <Link style={{ textDecoration: "none", color: "white" }} to="/login">
           LOGIN
         </Link>
-        <Link style={{ textDecoration: "none", color: "white" }} to="/search">
-          SEARCH
-        </Link>
-        
       </div>
     </div>
   );
