@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getRepo } from "../redux/Api";
+import { useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -17,14 +18,51 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Search() {
   const isLoading = useSelector((state) => state.repo.isLoading);
-  const repos = useSelector((state) => state.repo.repos.items);
+  const repos = useSelector((state) => state.repo.repos);
   const search = useLocation().search;
+  const [page, setPage] = useState(1);
   const repoName = new URLSearchParams(search).get("q");
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(getRepo(repoName)), []);
+  const [perPage, setPerPage] = useState(5);
 
-  console.log(repos);
+  useEffect(() => dispatch(getRepo(repoName, perPage, page)), [page]);
+
+  const Pagination = ({ total, currPage, onPageChange }) => {
+    const Pages = new Array(total).fill(0);
+    return (
+      <div style={{ display: "flex", marginTop: "10px",justifyContent: "center",alignItems: "center"}}>
+        {Pages.map((value, index) =>
+          currPage === index + 1 ? (
+            <button
+              style={{
+                textDecoration: "none",
+                outline: "none",
+                borderStyle: "none",
+                cursor: "pointer",
+              }}
+              disabled
+              onClick={() => onPageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ) : (
+            <button
+              style={{
+                textDecoration: "none",
+                outline: "none",
+                borderStyle: "none",
+                cursor: "pointer",
+              }}
+              onClick={() => onPageChange(index + 1)}
+            >
+              {index + 1}
+            </button>
+          )
+        )}
+      </div>
+    );
+  };
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -32,10 +70,26 @@ export default function Search() {
 
       <h2>SEARCH RESULT</h2>
 
+      <label for="perPage">Choose per page value:</label>
+
+      <select name="perPage" onChange={(e) => setPerPage(e.target.value)}>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <Pagination
+        currPage={page}
+        total={5}
+        onPageChange={(page) => setPage(page)}
+      ></Pagination>
+
       <Box sx={{ flexGrow: 1, marginTop: "2rem" }}>
         <Grid container spacing={4} justifyContent="center" alignItems="center">
           {!isLoading &&
-            repos?.map((item) => (
+            repos.items?.map((item) => (
               <Grid item xs={3} key={item.id}>
                 <Item>
                   <p>
