@@ -37,7 +37,13 @@ export default function Search() {
 
       <label for="perPage">Choose per page value:</label>
 
-      <select name="perPage" onChange={(e) => setPerPage(e.target.value)}>
+      <select
+        name="perPage"
+        onChange={(e) => {
+          setPerPage(e.target.value);
+          setPage(1);
+        }}
+      >
         <option value="5">5</option>
         <option value="6">6</option>
         <option value="7">7</option>
